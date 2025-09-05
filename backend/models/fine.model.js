@@ -54,6 +54,15 @@ const fineSchema = new mongoose.Schema({
 
 fineSchema.index({location: "2dsphere"});
 
+fineSchema.virtual("lat").get(function() {
+    return this.location.coordinates[1];
+});
+
+fineSchema.virtual("lng").get(function() {
+    return this.location.coordinates[0];
+})
+
+
 const Fine = mongoose.model("Fine",fineSchema);
 
 export { Fine };

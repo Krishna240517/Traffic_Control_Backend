@@ -32,5 +32,14 @@ const tollSchema = new mongoose.Schema({
 });
 
 tollSchema.index({location: "2dsphere"});
+
+tollSchema.virtual("lat").get(function() {
+    return this.location.coordinates[1];
+});
+
+tollSchema.virtual("lng").get(function() {
+    return this.location.coordinates[0];
+})
+
 const Toll = mongoose.model("Toll",tollSchema);
 export { Toll };

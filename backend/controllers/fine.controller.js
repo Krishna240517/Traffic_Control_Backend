@@ -99,3 +99,16 @@ export const updateFine = async (req, res) => {
     }
 };
 
+export const getMyFines = async(req, res) => {
+    try {
+        const fine = await Fine.findOne({ ownerId: req.user._id })
+        .populate("vehicleId","plateNumber type")
+        .populate("ownerId","name email")
+        .lean()
+        if(!fine) return res.status(401).json({msg:"No Fine in Existence"});
+        res.status(201).json({info: fine});
+    } catch (error) {
+        console.error("Error in get my fines controller",error.message);
+        return res.status(500).json({msg:"Internal Server Error"});
+    }
+}

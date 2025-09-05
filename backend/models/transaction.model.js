@@ -57,5 +57,15 @@ const transactionSchema = new mongoose.Schema({
 });
 
 transactionSchema.index({ location: "2dsphere" });
+
+
+transactionSchema.virtual("lat").get(function() {
+    return this.location.coordinates[1];
+});
+
+transactionSchema.virtual("lng").get(function() {
+    return this.location.coordinates[0];
+})
+
 const Transaction = mongoose.model("Transaction",transactionSchema);
 export { Transaction };
