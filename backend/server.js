@@ -9,6 +9,7 @@ import { fineRouter } from "./routes/fine.route.js";
 import { tollRouter } from "./routes/toll.route.js";
 import { transactionRouter } from "./routes/transaction.route.js";
 import { trackingRouter } from "./routes/tracking.route.js";
+import { congestionRouter } from "./routes/congestion.route.js";
 import trackingSocket from "./sockets/tracking.socket.js";
 import { Server } from "socket.io";
 import http from "http";
@@ -31,6 +32,7 @@ app.use("/api/tolls",tollRouter);
 app.use("/api/fines",fineRouter);
 app.use("/api/transactions",transactionRouter);
 app.use("/api/trackings",trackingRouter);
+app.use("/api/congestion",congestionRouter);
 
 
 const server = http.createServer(app);
